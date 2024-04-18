@@ -49,6 +49,31 @@ do
 
 
     }
+    if (choice == "2")
+    {
+        try
+        {
+            // Create and save a new Blog
+            logger.Info($"Option {"2"} selected");
+            Console.Write("Enter a name for a new Blog: ");
+            string name = Console.ReadLine();
+            if (string.IsNullOrEmpty(name))
+            {
+                logger.Error("Blog name cannot be null");
+            }
+            else
+            {
+                var blog = new Blog { Name = name };
+
+                db.AddBlog(blog);
+                logger.Info("Blog added - {name}", name);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.Error(ex.Message);
+        }
+    }
 
 
 
