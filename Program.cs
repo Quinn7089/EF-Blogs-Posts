@@ -74,6 +74,23 @@ do
             logger.Error(ex.Message);
         }
     }
+     if (choice == "3")
+    {
+        logger.Info($"Option {"3"} selected");
+        Console.WriteLine("Select the blog you want to post to:");
+        var query = db.Blogs.OrderBy(b => b.BlogId);
+        foreach (var item in query)
+        {
+
+            Console.WriteLine($"{item.BlogId}) {item.Name}");
+
+        }
+        var blogFind = Console.ReadLine();
+        int ID = int.Parse(blogFind);
+        var blogID = new Blog { BlogId = ID };
+        List<Blog> blogs = db.Blogs.Where(b => b.Name.Contains(blogFind)).ToList();
+        Blog blog = new Blog();
+    }
 
 
 
