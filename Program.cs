@@ -145,6 +145,23 @@ do
             logger.Info("Invaild Blog ID");
         }
 
+        
+        if (postFind == "0")
+        {
+
+            var queryName = db.Blogs.OrderBy(b => b.Name);
+            var queryPost0 = db.Posts.OrderBy(b => b.PostId);
+            int total1 = db.Posts.Count();
+            Console.WriteLine($"{total1} post(s) returned");
+            foreach (var item0 in queryPost)
+            {
+                Console.WriteLine("");
+                Console.WriteLine($"Blog: {item0.BlogId}\nTitle: {item0.Title}\nContent: {item0.Content}");
+                Console.WriteLine("");
+            }
+
+        }
+
 
     }
 
