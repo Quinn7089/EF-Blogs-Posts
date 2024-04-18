@@ -145,7 +145,7 @@ do
             logger.Info("Invaild Blog ID");
         }
 
-        
+
         if (postFind == "0")
         {
 
@@ -165,7 +165,10 @@ do
 
     }
 
-
+    if (choice == "q")
+    {
+        logger.Info("Program ended");
+    }
 
 
 } while (choice == "1" || choice == "2" || choice == "3" || choice == "4");
