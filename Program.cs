@@ -10,6 +10,7 @@ string path = Directory.GetCurrentDirectory() + "\\nlog.config";
 var logger = LogManager.LoadConfiguration(path).GetCurrentClassLogger();
 logger.Info("Program started");
 string choice = "";
+string postFind = " ";
 
 do
 {
@@ -74,7 +75,7 @@ do
             logger.Error(ex.Message);
         }
     }
-     if (choice == "3")
+    if (choice == "3")
     {
         logger.Info($"Option {"3"} selected");
         Console.WriteLine("Select the blog you want to post to:");
@@ -108,6 +109,43 @@ do
         var PostTitle = new Post { Title = postTitle, Content = postContent, BlogId = ID };
 
         db.addPost(PostTitle);
+    }
+
+    if (choice == "4")
+    {
+        logger.Info($"Option {"4"} selected");
+        Console.WriteLine("Select the blog's posts to display");
+        Console.WriteLine("0) Post from all blogs");
+        var query = db.Blogs.OrderBy(b => b.BlogId);
+        foreach (var item in query)
+        {
+            Console.WriteLine($"{item.BlogId}) {item.Name}");
+
+        }
+        postFind = Console.ReadLine();
+        Post post = new Post();
+        int ID = int.Parse(postFind);
+        var blogID = new Blog { BlogId = ID };
+        string BlogID = post.BlogId.ToString();
+        List<Post> posts = db.Posts.Where(b => BlogID.Contains(postFind)).ToList();
+        var queryPost = db.Posts.OrderBy(b => b.BlogId);
+        Blog blog = new Blog();
+        foreach (var item in queryPost)
+        {
+            if (item.BlogId == ID)
+            {
+                Console.WriteLine($"Blog: {item.BlogId}\nTitle: {item.Title}\nContent: {item.Content}");
+                Console.WriteLine("");
+            }
+        }
+
+
+        if (blog.BlogId != ID)
+        {
+            logger.Info("Invaild Blog ID");
+        }
+
+
     }
 
 
