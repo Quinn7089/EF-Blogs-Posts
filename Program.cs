@@ -90,6 +90,24 @@ do
         var blogID = new Blog { BlogId = ID };
         List<Blog> blogs = db.Blogs.Where(b => b.Name.Contains(blogFind)).ToList();
         Blog blog = new Blog();
+
+        Console.WriteLine("Enter the Post title");
+        string postTitle = Console.ReadLine();
+        if (string.IsNullOrEmpty(postTitle))
+        {
+            logger.Error("Blog name cannot be null");
+            { break; }
+        }
+        Console.WriteLine("Enter the Post content");
+        string postContent = Console.ReadLine();
+        if (string.IsNullOrEmpty(postContent))
+        {
+            logger.Error("Blog name cannot be null");
+            { break; }
+        }
+        var PostTitle = new Post { Title = postTitle, Content = postContent, BlogId = ID };
+
+        db.addPost(PostTitle);
     }
 
 
